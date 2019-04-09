@@ -9,26 +9,23 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-IF '$(LoadTestData)' = 'true'
+IF '$(LoadTestData)' = 'True'
 
 
 BEGIN
 	
 -- ENSURE THERE IS NO DATA IN THE TABLES BEFORE DEPLOYING SAMPLE DATA -- 
-DELETE FROM tblLog;
-DELETE FROM tblAccount;
+DELETE FROM Account;
+DELETE FROM Log;
 
 -- INSERT SAMPLE DATA --
-INSERT INTO Account (AcctNo,Fname,Lname,CreditLimit,Balance) VALUES
-(2342275,'Josh', 'Bereson',-30,40),
-(923353819,'Edward','McKenzie-Mcharg',-16,24),
-(987654321,'Roland','Baker', -1000,955),
-(294444582,'Richard','Sims',-7,77);
+INSERT INTO Account (AcctNo,Fname,Lname,CreditLimit,Balance) Values
+(1,'Josh','Bereson',10,100),
+(2,'Roland','Baker',15,1500),
+(3,'Edward','McKenzie-McHarg',20,60);
 
-INSERT INTO Log (OrigAcct,LogDateTime,RecAcct,Amount) VALUES
-(2342275,DATEADD(minute,-1,GETUTCDATE()),94444582,3),
-(923353819,DATEADD(minute,-2,GETUTCDATE()),987654321,31),
-(987654321,DATEADD(minute,-3,GETUTCDATE()),923353819,121),
-(294444582,DATEADD(minute,-4,GETUTCDATE()),2342275,5.31);
-
-END;
+INSERT INTO Log (OrigAcct,LogDateTime,RecAcct,Ammount) Values
+(2,'2019-04-08 16:20:00',3,1000),
+(1,'2003-02-10 09:15:34',2,5),
+(3,'2017-06-23 13:53:22',1,27);
+End;
